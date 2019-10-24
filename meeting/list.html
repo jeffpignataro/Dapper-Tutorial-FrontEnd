@@ -46,14 +46,13 @@
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-10">
-        <h1>People</h1>
-        <div class="list-group" id="person-list">
+        <h1>Meeting</h1>
+        <div class="list-group" id="meeting-list">
           <a href="#" class="list-group-item disabled">
-            <span class="badge">Age</span>
             Name
           </a>
         </div>
-        <a type="button" class="btn btn-primary" href="/person/create.html" role="button">Create Person</a>
+        <a type="button" class="btn btn-primary" href="/meeting/create.html" role="button">Create Meeting</a>
       </div>
     </div>
 
@@ -71,14 +70,14 @@
   <script src="/js/vendor/bootstrap.min.js"></script>
 
   <script src="/js/main.js"></script>
-  <script src="/js/person.js"></script>
+  <script src="/js/meeting.js"></script>
   <script src="/js/nav.js"></script>
   <script>
     $(function () {
-      Get("https://localhost:5001/api/Person/").then(function (result) {
-        result.forEach(person => {
-          $("#person-list").append(
-            `<a href="/person/update.html?id=${person.id}" class='list-group-item'><span class='badge'>${person.age}</span>${person.name}</a>`)
+      Get("https://localhost:5001/api/meeting/").then(function (result) {
+        result.forEach(meeting => {
+          $("#meeting-list").append(
+            `<a href="/meeting/update.html?id=${meeting.id}" class='list-group-item'>${meeting.name}</a>`)
         });
       })
     });

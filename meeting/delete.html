@@ -46,22 +46,33 @@
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-10">
-        <h1>People</h1>
-        <div class="list-group" id="person-list">
-          <a href="#" class="list-group-item disabled">
-            <span class="badge">Age</span>
-            Name
-          </a>
-        </div>
-        <a type="button" class="btn btn-primary" href="/person/create.html" role="button">Create Person</a>
-      </div>
+        <h1>Update Person</h1>
+        <form class="form-horizontal" id="DeletePerson" method="PUT">
+          <p>
+            Are you sure you want to delete <span id="personName" style="color: red;"></span>?
+          </p>
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-danger" id="btnDeletePerson">Delete</button>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-primary" onclick="window.location='/person/list.html'">Cancel</button>
+          </div>
+      </form>
     </div>
+  </div>
 
-    <hr>
+  <div class="row">
+    <div class="col-md-10">
+      <h2>Result</h2>
+      <p class="result"></p>
+    </div>
+  </div>
 
-    <footer>
-      <p>&copy; Jeff Pignataro 2019</p>
-    </footer>
+  <hr>
+
+  <footer>
+    <p>&copy; Jeff Pignataro 2019</p>
+  </footer>
   </div> <!-- /container -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
@@ -73,13 +84,12 @@
   <script src="/js/main.js"></script>
   <script src="/js/person.js"></script>
   <script src="/js/nav.js"></script>
+
   <script>
     $(function () {
-      Get("https://localhost:5001/api/Person/").then(function (result) {
-        result.forEach(person => {
-          $("#person-list").append(
-            `<a href="/person/update.html?id=${person.id}" class='list-group-item'><span class='badge'>${person.age}</span>${person.name}</a>`)
-        });
+      Get(`https://localhost:5001/api/Person/${$.urlParam('id')}`).then(function (result) {
+        $("#personName").html(result.name);
+        $("#btnDeletePerson").attr("onclick", `DeletePerson(${result.id});`);
       })
     });
   </script>
