@@ -26,6 +26,13 @@ $("#UpdatePerson").submit(function (event) {
     };
 
     Put(url, data).then(function (result) {
-        $(".result").html(JSON.stringify(result));
+        $(".result").html(`${JSON.stringify(result)} Row(s) udpated.`);
+        window.location = "/person/list.html";
     });
 });
+
+function DeletePerson(id) {
+    Delete(`https://localhost:5001/api/Person/${id}`).then(function () {
+        window.location = "/person/list.html";        
+    });
+}

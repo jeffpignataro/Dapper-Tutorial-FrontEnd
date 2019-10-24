@@ -4,6 +4,10 @@ function Post(url, data) {
 function Put(url, data) {
     return apiCall(url, "PUT", data);
 }
+function Delete(url) {
+    return apiCall(url, "DELETE", '');
+}
+
 
 function Get(url) {
     return jQuery.ajax({
